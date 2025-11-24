@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bantuan - ViraNet</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <i class="fas fa-wifi"></i> Vira<span>Net</span>
+                </a>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="packages.html">Paket Internet</a></li>
+                    <li><a href="support.html" class="active">Bantuan</a></li>
+                    <li><a href="login.html" class="btn btn-primary" style="padding: 8px 20px;">Login Admin</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" style="min-height: 40vh; padding-top: 150px; padding-bottom: 50px;">
+        <div class="container" style="text-align: center;">
+            <div class="hero-text" style="width: 100%; max-width: 800px; margin: 0 auto;">
+                <h1>Pusat Bantuan</h1>
+                <p style="margin: 0 auto;">Kami siap membantu kendala internet Anda 24/7.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info-card">
+                    <h3 style="margin-bottom: 2rem;">Kontak Kami</h3>
+
+                    <div class="info-item">
+                        <i class="fab fa-whatsapp"></i>
+                        <div>
+                            <h4>WhatsApp</h4>
+                            <p>0812-3456-7890</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>help@viranet.com</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Alamat</h4>
+                            <p>Jl. Merdeka No. 123, Ampana</p>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 2rem;">
+                        <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2225.228106307349!2d121.8594512!3d-0.411493!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d87cdc000000005%3A0x6a257013e5d710a8!2sPolsek%20Una-Una!5e1!3m2!1sid!2sid!4v1763905217317!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                            width="100%" height="200" style="border:0; border-radius: 8px;" allowfullscreen=""
+                            loading="lazy"></iframe>
+                    </div>
+                </div>
+
+                <div class="support-form">
+                    <h3 style="margin-bottom: 1.5rem; color: var(--secondary);">Formulir Pengaduan</h3>
+                    <form id="support-form">
+                        <div class="form-group">
+                            <label for="name">Nama Lengkap</label>
+                            <input type="text" id="name" class="form-control" required placeholder="Masukkan nama Anda">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Nomor WhatsApp</label>
+                            <input type="tel" id="phone" class="form-control" required placeholder="08xxx">
+                        </div>
+                        <div class="form-group">
+                            <label for="issue">Jenis Gangguan</label>
+                            <select id="issue" class="form-control" required>
+                                <option value="">Pilih Masalah</option>
+                                <option value="No Internet">Internet Mati</option>
+                                <option value="Slow Connection">Koneksi Lambat</option>
+                                <option value="Billing">Tagihan / Pembayaran</option>
+                                <option value="Other">Lainnya</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Detail Masalah</label>
+                            <textarea id="message" class="form-control" rows="5" required
+                                placeholder="Jelaskan kendala yang Anda alami..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Kirim Laporan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo" style="margin-bottom: 1rem; color: #fff;">
+                        <i class="fas fa-wifi"></i> Vira<span>Net</span>
+                    </div>
+                    <p>Solusi internet rumahan terbaik untuk keluarga Indonesia.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Layanan</h4>
+                    <ul class="footer-links">
+                        <li><a href="packages.html">Internet Harian</a></li>
+                        <li><a href="packages.html">Internet Bulanan</a></li>
+                        <li><a href="packages.html">Voucher WiFi</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Bantuan</h4>
+                    <ul class="footer-links">
+                        <li><a href="support.html">Cek Gangguan</a></li>
+                        <li><a href="support.html">Lapor Masalah</a></li>
+                        <li><a href="https://wa.me/6281234567890">Chat WhatsApp</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Kontak</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Jl. Merdeka No. 123, Jakarta</p>
+                    <p><i class="fas fa-phone"></i> 0812-3456-7890</p>
+                    <p><i class="fas fa-envelope"></i> help@viranet.com</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 ViraNet. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
