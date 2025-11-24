@@ -99,7 +99,7 @@ function loadPackages() {
                     <li><i class="fas fa-tachometer-alt"></i> Speed up to ${pkg.speed}</li>
                     ${pkg.features.map(f => `<li><i class="fas fa-check-circle"></i> ${f}</li>`).join('')}
                 </ul>
-                <a href="https://wa.me/6281234567890?text=Halo%20ViraNet,%20saya%20ingin%20pesan%20${encodeURIComponent(pkg.name)}" 
+                <a href="https://wa.me/6285216315002?text=Halo%20ViraNet,%20saya%20ingin%20pesan%20${encodeURIComponent(pkg.name)}" 
                    class="btn btn-primary" style="width: 100%; margin-top: 2rem; text-align: center;">
                    <i class="fab fa-whatsapp"></i> Pesan Sekarang
                 </a>
@@ -113,7 +113,7 @@ const supportForm = document.getElementById('support-form');
 if (supportForm) {
     supportForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        
+
         const name = document.getElementById('name').value;
         const phone = document.getElementById('phone').value;
         const issue = document.getElementById('issue').value;
