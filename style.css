@@ -508,30 +508,6 @@ footer {
     margin-bottom: 1.5rem;
 }
 
-.rating {
-    color: var(--accent);
-}
-
-/* Responsive Updates */
-@media (max-width: 768px) {
-    .about-content {
-        flex-direction: column;
-        gap: 2rem;
-    }
-
-    .about-image {
-        order: -1;
-    }
-
-    .about-stats {
-        justify-content: space-between;
-    }
-}
-
-.packages-section {
-    padding: 120px 0 80px;
-}
-
 .package-card {
     background: #fff;
     border-radius: 20px;

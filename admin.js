@@ -1,4 +1,8 @@
-// Admin Panel Logic
+// Sidebar Toggle for Mobile
+function toggleSidebar() {
+    const sidebarMenu = document.querySelector('.sidebar-menu');
+    sidebarMenu.classList.toggle('active');
+}
 
 // Check Auth
 function checkAuth() {
@@ -61,11 +65,8 @@ if (window.location.pathname.includes('admin.html')) {
     // --- PACKAGES CRUD ---
 
     function getPackages() {
-        // Reuse default packages if empty (same logic as main.js)
         let pkgs = JSON.parse(localStorage.getItem('viranet_packages'));
         if (!pkgs || pkgs.length === 0) {
-            // Default data needs to be defined here too or shared. 
-            // For simplicity, we assume main.js has run once or we re-define defaults.
             pkgs = [
                 { id: 1, name: 'Paket Harian', price: 'Rp 5.000', period: '/ 24 Jam', speed: '10 Mbps', features: ['Unlimited Quota'], type: 'voucher' },
                 { id: 2, name: 'Paket Mingguan', price: 'Rp 30.000', period: '/ 7 Hari', speed: '15 Mbps', features: ['Unlimited Quota'], type: 'voucher' },
