@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeri Premium - ViraNet</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+
+<body class="gallery-theme">
+
+    <header class="navbar-transparent">
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <i class="fas fa-wifi"></i> Vira<span>Net</span>
+                </a>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="packages.html">Layanan</a></li>
+                    <li><a href="gallery.html" class="active">Galeri</a></li>
+                    <li><a href="coverage.html">Cakupan</a></li>
+                    <li><a href="member.html">Member</a></li>
+                    <li><a href="contact.html">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Premium Gallery Hero -->
+    <section class="gallery-hero-premium">
+        <div class="container">
+            <div data-aos="fade-down">
+                <h1>Galeri <span>Aktivitas</span></h1>
+                <p>Dokumentasi profesional pemasangan, maintenance, dan infrastruktur jaringan ViraNet di berbagai
+                    lokasi.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Content -->
+    <section class="gallery-content">
+        <div class="container">
+            <!-- Filter Navbar -->
+            <div class="gallery-filter-nav" data-aos="fade-up">
+                <button class="filter-btn active" data-filter="all">Semua</button>
+                <button class="filter-btn" data-filter="home">Instalasi Rumah</button>
+                <button class="filter-btn" data-filter="business">Bisnis</button>
+                <button class="filter-btn" data-filter="tower">Tower</button>
+                <button class="filter-btn" data-filter="team">Tim Lapangan</button>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="gallery-grid-premium" id="gallery-grid">
+                <!-- Item 1: Home -->
+                <div class="gallery-card-premium" data-category="home" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=80"
+                        alt="Pemasangan Kabel">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category-tag">Instalasi Rumah</span>
+                        <div class="gallery-info">
+                            <h3>Pemasangan Kabel Fiber</h3>
+                            <p>Instalasi rapi dan aman ke rumah pelanggan.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2: Business -->
+                <div class="gallery-card-premium" data-category="business" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+                        alt="Konfigurasi Router">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category-tag">Bisnis</span>
+                        <div class="gallery-info">
+                            <h3>Setup Server Kantor</h3>
+                            <p>Konfigurasi jaringan untuk kebutuhan bisnis.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3: Tower -->
+                <div class="gallery-card-premium" data-category="tower" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?w=800&q=80" alt="Tower">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category-tag">Tower</span>
+                        <div class="gallery-info">
+                            <h3>Maintenance Tower</h3>
+                            <p>Perawatan rutin pemancar utama.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 4: Business -->
+                <div class="gallery-card-premium" data-category="business" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=800&q=80"
+                        alt="Perangkat Modern">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category-tag">Bisnis</span>
+                        <div class="gallery-info">
+                            <h3>Data Center Mini</h3>
+                            <p>Pusat kontrol jaringan lokal.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 5: Tower -->
+                <div class="gallery-card-premium" data-category="tower" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1606904825846-647eb07f5be2?w=800&q=80"
+                        alt="Fiber Optic">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category-tag">Tower</span>
+                        <div class="gallery-info">
+                            <h3>Jaringan Backbone</h3>
+                            <p>Kabel fiber optic kapasitas besar.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 6: Business -->
+                <div class="gallery-card-premium" data-category="business" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1547394765-185e1e68f34e?w=800&q=80" alt="Access Point">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category-tag">Bisnis</span>
+                        <div class="gallery-info">
+                            <h3>WiFi Corner</h3>
+                            <p>Pemasangan hotspot area publik.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 7: Team -->
+                <div class="gallery-card-premium" data-category="team" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80"
+                        alt="Tim Teknisi">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category-tag">Tim Lapangan</span>
+                        <div class="gallery-info">
+                            <h3>Briefing Pagi</h3>
+                            <p>Koordinasi tim sebelum terjun ke lapangan.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 8: Team -->
+                <div class="gallery-card-premium" data-category="team" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80" alt="Training">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category-tag">Tim Lapangan</span>
+                        <div class="gallery-info">
+                            <h3>Pelatihan Teknisi</h3>
+                            <p>Upgrade skill untuk pelayanan terbaik.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 9: Team -->
+                <div class="gallery-card-premium" data-category="team" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&q=80"
+                        alt="Kerja Lapangan">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category-tag">Tim Lapangan</span>
+                        <div class="gallery-info">
+                            <h3>On Site Support</h3>
+                            <p>Penanganan gangguan langsung di lokasi.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox-modal" id="lightbox">
+        <button class="lightbox-close-btn">&times;</button>
+        <button class="lightbox-nav-btn lightbox-prev"><i class="fas fa-chevron-left"></i></button>
+        <div class="lightbox-content-wrapper">
+            <img src="" alt="" class="lightbox-image" id="lightbox-img">
+            <video src="" class="lightbox-video" id="lightbox-video" controls style="display: none;"></video>
+            <div class="lightbox-caption">
+                <h3 id="lightbox-title">Judul Foto</h3>
+                <p id="lightbox-desc">Deskripsi foto.</p>
+            </div>
+        </div>
+        <button class="lightbox-nav-btn lightbox-next"><i class="fas fa-chevron-right"></i></button>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo" style="margin-bottom: 1rem; color: #fff;">
+                        <i class="fas fa-wifi"></i> Vira<span>Net</span>
+                    </div>
+                    <p>Solusi internet rumahan terbaik untuk keluarga Indonesia.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Layanan</h4>
+                    <ul class="footer-links">
+                        <li><a href="packages.html">Internet Harian</a></li>
+                        <li><a href="packages.html">Internet Bulanan</a></li>
+                        <li><a href="packages.html">Voucher WiFi</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Bantuan</h4>
+                    <ul class="footer-links">
+                        <li><a href="contact.html">Cek Gangguan</a></li>
+                        <li><a href="contact.html">Lapor Masalah</a></li>
+                        <li><a href="https://wa.me/6285216315002">Chat WhatsApp</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Kontak</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Jl. Merdeka No. 123, Jakarta</p>
+                    <p><i class="fas fa-phone"></i> +62 852-1631-5002</p>
+                    <p><i class="fas fa-envelope"></i> help@viranet.com</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 ViraNet. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+
+        // Ensure gallery init runs
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof initGallery === 'function') {
+                initGallery();
+            }
+        });
+    </script>
+</body>
+
+</html>

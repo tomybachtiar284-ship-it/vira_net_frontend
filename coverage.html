@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cakupan Area - ViraNet</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <header class="navbar-transparent">
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <i class="fas fa-wifi"></i> Vira<span>Net</span>
+                </a>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="packages.html">Layanan</a></li>
+                    <li><a href="gallery.html">Galeri</a></li>
+                    <li><a href="coverage.html" class="active">Cakupan</a></li>
+                    <li><a href="member.html">Member</a></li>
+                    <li><a href="contact.html">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Premium Coverage Hero -->
+    <section class="coverage-hero-premium">
+        <div class="container">
+            <div class="coverage-hero-grid">
+                <div class="coverage-hero-text" data-aos="fade-right">
+                    <h1>Jangkauan Luas <br><span>Koneksi Stabil</span></h1>
+                    <p>Kami terus memperluas jaringan fiber optic kami untuk menjangkau lebih banyak wilayah di
+                        Kabupaten Parigi Moutong. Komitmen kami adalah memberikan akses internet berkualitas tinggi
+                        hingga ke pelosok desa.</p>
+                </div>
+                <div class="coverage-stats-grid" data-aos="fade-left">
+                    <div class="coverage-stat-card">
+                        <span class="stat-number">12+</span>
+                        <span class="stat-label">Desa Tercover</span>
+                    </div>
+                    <div class="coverage-stat-card">
+                        <span class="stat-number">3</span>
+                        <span class="stat-label">Kecamatan</span>
+                    </div>
+                    <div class="coverage-stat-card">
+                        <span class="stat-number">2025</span>
+                        <span class="stat-label">Ekspansi</span>
+                    </div>
+                    <div class="coverage-stat-card">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Monitoring</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Check Availability Section -->
+    <section class="check-availability-section">
+        <div class="container">
+            <div class="availability-card" data-aos="fade-up">
+                <h2>Cek Ketersediaan Area</h2>
+                <p style="color: #64748B; margin-bottom: 0;">Masukkan nama desa atau kecamatan Anda untuk mengecek
+                    status jaringan.</p>
+
+                <form class="availability-form" id="check-coverage-form">
+                    <input type="text" class="availability-input" placeholder="Contoh: Ampana, Ratolindo..." required>
+                    <button type="submit" class="btn-check">
+                        <i class="fas fa-search"></i> Cek Sekarang
+                    </button>
+                </form>
+            </div>
+
+            <!-- Coverage Grid -->
+            <div class="area-grid-premium">
+                <!-- Card 1 -->
+                <div class="area-card-premium" data-aos="fade-up" data-aos-delay="100">
+                    <div class="area-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Kecamatan Ampana Kota</h3>
+                    <ul class="area-list">
+                        <li><i class="fas fa-check-circle"></i> Kelurahan Ampana</li>
+                        <li><i class="fas fa-check-circle"></i> Kelurahan Bailo</li>
+                        <li><i class="fas fa-check-circle"></i> Kelurahan Dondo</li>
+                        <li><i class="fas fa-check-circle"></i> Kelurahan Labuan</li>
+                        <li><i class="fas fa-check-circle"></i> Kelurahan Malotong</li>
+                    </ul>
+                    <div class="status-badge active">
+                        <i class="fas fa-signal"></i> Jaringan Aktif
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="area-card-premium" data-aos="fade-up" data-aos-delay="200">
+                    <div class="area-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Kecamatan Ratolindo</h3>
+                    <ul class="area-list">
+                        <li><i class="fas fa-check-circle"></i> Desa Sumoli</li>
+                        <li><i class="fas fa-check-circle"></i> Desa Sabulira Toba</li>
+                        <li><i class="fas fa-check-circle"></i> Desa Patingko</li>
+                    </ul>
+                    <div class="status-badge active">
+                        <i class="fas fa-signal"></i> Jaringan Aktif
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="area-card-premium" data-aos="fade-up" data-aos-delay="300">
+                    <div class="area-icon" style="background: #FFFBEB; color: #D97706;">
+                        <i class="fas fa-hard-hat"></i>
+                    </div>
+                    <h3>Rencana Ekspansi 2025</h3>
+                    <ul class="area-list">
+                        <li><i class="fas fa-clock" style="color: #D97706;"></i> Kecamatan Tojo</li>
+                        <li><i class="fas fa-clock" style="color: #D97706;"></i> Kecamatan Ulubongka</li>
+                        <li><i class="fas fa-clock" style="color: #D97706;"></i> Kecamatan Parigi Barat</li>
+                    </ul>
+                    <div class="status-badge soon">
+                        <i class="fas fa-tools"></i> Segera Hadir
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Full Width Map Section -->
+    <section class="map-section-premium" data-aos="fade-up">
+        <div class="container">
+            <div class="section-title">
+                <h2>Peta Jangkauan <span class="text-gradient">Layanan</span></h2>
+                <p>Visualisasi area cakupan layanan ViraNet di Kabupaten Parigi Moutong.</p>
+            </div>
+            <div class="map-card-premium">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2225.228106307349!2d121.8594512!3d-0.411493!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d87cdc000000005%3A0x6a257013e5d710a8!2sPolsek%20Una-Una!5e1!3m2!1sid!2sid!4v1763905217317!5m2!1sid!2sid"
+                    allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo" style="margin-bottom: 1rem; color: #fff;">
+                        <i class="fas fa-wifi"></i> Vira<span>Net</span>
+                    </div>
+                    <p>Solusi internet rumahan terbaik untuk keluarga Indonesia.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Layanan</h4>
+                    <ul class="footer-links">
+                        <li><a href="packages.html">Internet Harian</a></li>
+                        <li><a href="packages.html">Internet Bulanan</a></li>
+                        <li><a href="packages.html">Voucher WiFi</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Bantuan</h4>
+                    <ul class="footer-links">
+                        <li><a href="contact.html">Cek Gangguan</a></li>
+                        <li><a href="contact.html">Lapor Masalah</a></li>
+                        <li><a href="https://wa.me/6285216315002">Chat WhatsApp</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Kontak</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Jl. Merdeka No. 123, Jakarta</p>
+                    <p><i class="fas fa-phone"></i> +62 852-1631-5002</p>
+                    <p><i class="fas fa-envelope"></i> help@viranet.com</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 ViraNet. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100
+        });
+    </script>
+</body>
+
+</html>

@@ -6,15 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ViraNet - Internet Cepat & Stabil</title>
     <link rel="stylesheet" href="style.css">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
 <body>
 
-    <!-- Navigation -->
     <header>
         <div class="container">
             <nav>
@@ -26,29 +23,30 @@
                 </div>
                 <ul class="nav-links">
                     <li><a href="index.html" class="active">Beranda</a></li>
-                    <li><a href="packages.html">Paket Internet</a></li>
-                    <li><a href="support.html">Bantuan</a></li>
-                    <li><a href="login.html" class="btn btn-primary" style="padding: 8px 20px;">Login Admin</a></li>
+                    <li><a href="packages.html">Layanan</a></li>
+                    <li><a href="gallery.html">Galeri</a></li>
+                    <li><a href="coverage.html">Cakupan</a></li>
+                    <li><a href="member.html">Member</a></li>
+                    <li><a href="contact.html">Kontak</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <h1>Internet Cepat <br><span>Tanpa Batas</span></h1>
-                    <p>Nikmati koneksi internet stabil untuk streaming, gaming, dan bekerja dari rumah. Harga
-                        terjangkau, layanan memukau.</p>
+                    <h1>Visi, Misi, dan <br><span>Nilai Inti</span></h1>
+                    <p>Halaman utama yang menyambut pengunjung dengan informasi singkat mengenai visi, misi, dan nilai
+                        inti platform Anda. Dirancang sebagai pintu masuk yang menarik, informatif, dan memudahkan
+                        pengguna menjelajahi fitur lainnya.</p>
                     <div style="display: flex; gap: 1rem;">
                         <a href="packages.html" class="btn btn-primary">Lihat Paket</a>
                         <a href="https://wa.me/6285216315002" class="btn btn-outline">Konsultasi Gratis</a>
                     </div>
                 </div>
                 <div class="hero-image">
-                    <!-- Placeholder for a nice vector illustration -->
                     <img src="https://img.freepik.com/free-vector/server-status-concept-illustration_114360-1000.jpg?w=740&t=st=1700000000~exp=1700000600~hmac=dummy"
                         alt="Internet Illustration"
                         onerror="this.src='https://via.placeholder.com/500x400?text=ViraNet+Illustration'">
@@ -100,24 +98,7 @@
                         <p>Membangun Koneksi, Membuka Potensi.</p>
                     </div>
                     <p style="margin-bottom: 1rem;">ViraNet didirikan pada tahun 2019 di Kabupaten Parigi Moutong,
-                        Sulawesi Tengah. Kami hadir dengan visi untuk memeratakan akses internet berkualitas hingga ke
-                        pelosok desa.</p>
-                    <p>Dengan dukungan teknisi handal dan infrastruktur yang terus berkembang, kami berkomitmen untuk
-                        memberikan layanan internet yang stabil, cepat, dan terjangkau bagi masyarakat.</p>
-                    <div class="about-stats">
-                        <div class="stat-item">
-                            <h3>5+</h3>
-                            <p>Tahun Pengalaman</p>
-                        </div>
-                        <div class="stat-item">
-                            <h3>1000+</h3>
-                            <p>Pelanggan Puas</p>
-                        </div>
-                        <div class="stat-item">
-                            <h3>99%</h3>
-                            <p>Uptime Jaringan</p>
-                        </div>
-                    </div>
+                        Sulawesi Tengah. Kami hadir dengan visi untuk memeratakan akses internet berkualitas.</p>
                 </div>
                 <div class="about-image">
                     <img src="assets/technician_mikrotik.png" alt="Teknisi ViraNet">
@@ -226,63 +207,64 @@
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Package Preview -->
-        <section class="packages-section" style="background: #F8FAFC;">
-            <div class="container">
-                <div class="section-title">
-                    <h2>Paket Terpopuler</h2>
-                    <p>Pilih paket yang sesuai dengan kebutuhan internet Anda.</p>
+    <!-- Package Preview -->
+    <section class="packages-section" style="background: #F8FAFC;">
+        <div class="container">
+            <div class="section-title">
+                <h2>Paket Terpopuler</h2>
+                <p>Pilih paket yang sesuai dengan kebutuhan internet Anda.</p>
+            </div>
+            <div class="features-grid" id="package-container">
+                <!-- Packages will be loaded here via JS -->
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="packages.html" class="btn btn-outline">Lihat Semua Paket</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo" style="margin-bottom: 1rem; color: #fff;">
+                        <i class="fas fa-wifi"></i> Vira<span>Net</span>
+                    </div>
+                    <p>Solusi internet rumahan terbaik untuk keluarga Indonesia.</p>
                 </div>
-                <div class="features-grid" id="package-container">
-                    <!-- Packages will be loaded here via JS -->
+                <div class="footer-col">
+                    <h4>Layanan</h4>
+                    <ul class="footer-links">
+                        <li><a href="packages.html">Internet Harian</a></li>
+                        <li><a href="packages.html">Internet Bulanan</a></li>
+                        <li><a href="packages.html">Voucher WiFi</a></li>
+                    </ul>
                 </div>
-                <div style="text-align: center; margin-top: 3rem;">
-                    <a href="packages.html" class="btn btn-outline">Lihat Semua Paket</a>
+                <div class="footer-col">
+                    <h4>Bantuan</h4>
+                    <ul class="footer-links">
+                        <li><a href="contact.html">Cek Gangguan</a></li>
+                        <li><a href="contact.html">Lapor Masalah</a></li>
+                        <li><a href="https://wa.me/6285216315002">Chat WhatsApp</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Kontak</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Jl. Merdeka No. 123, Jakarta</p>
+                    <p><i class="fas fa-phone"></i> +62 852-1631-5002</p>
+                    <p><i class="fas fa-envelope"></i> help@viranet.com</p>
                 </div>
             </div>
-        </section>
-
-        <!-- Footer -->
-        <footer>
-            <div class="container">
-                <div class="footer-grid">
-                    <div class="footer-col">
-                        <div class="logo" style="margin-bottom: 1rem; color: #fff;">
-                            <i class="fas fa-wifi"></i> Vira<span>Net</span>
-                        </div>
-                        <p>Solusi internet rumahan terbaik untuk keluarga Indonesia.</p>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Layanan</h4>
-                        <ul class="footer-links">
-                            <li><a href="packages.html">Internet Harian</a></li>
-                            <li><a href="packages.html">Internet Bulanan</a></li>
-                            <li><a href="packages.html">Voucher WiFi</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Bantuan</h4>
-                        <ul class="footer-links">
-                            <li><a href="support.html">Cek Gangguan</a></li>
-                            <li><a href="support.html">Lapor Masalah</a></li>
-                            <li><a href="https://wa.me/6285216315002">Chat WhatsApp</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-col">
-                        <h4>Kontak</h4>
-                        <p><i class="fas fa-map-marker-alt"></i> Jl. Merdeka No. 123, Jakarta</p>
-                        <p><i class="fas fa-phone"></i> +62 852-1631-5002</p>
-                        <p><i class="fas fa-envelope"></i> help@viranet.com</p>
-                    </div>
-                </div>
-                <div class="copyright">
-                    <p>&copy; 2024 ViraNet. All rights reserved.</p>
-                </div>
+            <div class="copyright">
+                <p>&copy; 2024 ViraNet. All rights reserved.</p>
             </div>
-        </footer>
+        </div>
+    </footer>
 
-        <script src="main.js"></script>
+    <script src="main.js"></script>
 </body>
 
 </html>

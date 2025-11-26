@@ -4,103 +4,198 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Admin - ViraNet</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Admin Dashboard - ViraNet</title>
+    <link rel="stylesheet" href="premium-admin.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-Logout</a></li>
-</ul>
-</aside>
 
-<!-- Main Content -->
-<main class="main-content">
-    <!-- Packages Section -->
-    <section id="packages-section">
-        <div class="admin-header">
-            <h2>Daftar Paket Internet</h2>
-            <button class="btn btn-primary" onclick="openAddModal()">+ Tambah Paket</button>
-        </div>
-        <div style="overflow-x: auto;">
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Nama Paket</th>
-                        <th>Harga</th>
-                        <th>Kecepatan</th>
-                        <th>Periode</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody id="packages-table-body">
-                    <!-- Populated by JS -->
-                </tbody>
-            </table>
-        </div>
-    </section>
+<body>
 
-    <!-- Tickets Section -->
-    <section id="tickets-section" style="display: none;">
-        <div class="admin-header">
-            <h2>Daftar Pengaduan Pelanggan</h2>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <i class="fas fa-wifi"></i> ViraNet
         </div>
-        <div style="overflow-x: auto;">
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Tanggal</th>
-                        <th>Nama</th>
-                        <th>WhatsApp</th>
-                        <th>Masalah</th>
-                        <th>Status</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody id="tickets-table-body">
-                    <!-- Populated by JS -->
-                </tbody>
-            </table>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="#" onclick="showSection('dashboard')" class="active" id="nav-dashboard">
+                    <i class="fas fa-th-large"></i> Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showSection('packages')" id="nav-packages">
+                    <i class="fas fa-box"></i> Paket Internet
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="showSection('tickets')" id="nav-tickets">
+                    <i class="fas fa-ticket-alt"></i> Pengaduan
+                </a>
+            </li>
+        </ul>
+        <div class="sidebar-footer">
+            <button onclick="logout()" class="btn-logout">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
         </div>
-    </section>
-</main>
-</div>
+    </aside>
 
-<!-- Add/Edit Package Modal (Simple Overlay) -->
-<div id="package-modal"
-    style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center;">
-    <div style="background: #fff; padding: 2rem; border-radius: 12px; width: 90%; max-width: 500px;">
-        <h3 id="modal-title" style="margin-bottom: 1.5rem;">Tambah Paket</h3>
-        <form id="package-form">
-            <input type="hidden" id="pkg-id">
-            <div class="form-group">
-                <label>Nama Paket</label>
-                <input type="text" id="pkg-name" class="form-control" required>
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <!-- Top Header -->
+        <div class="top-header">
+            <div class="page-title">
+                <h2 id="page-title">Dashboard</h2>
             </div>
-            <div class="form-group">
-                <label>Harga</label>
-                <input type="text" id="pkg-price" class="form-control" required>
+            <div class="user-profile">
+                <div class="user-info" style="text-align: right;">
+                    <h4 id="admin-name" style="font-size: 0.9rem; margin-bottom: 0;">Admin</h4>
+                    <span style="font-size: 0.75rem; color: #64748B;">Super Admin</span>
+                </div>
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
             </div>
-            <div class="form-group">
-                <label>Periode (ex: / Bulan)</label>
-                <input type="text" id="pkg-period" class="form-control" required>
+        </div>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon orange">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="total-packages-dash">0</h3>
+                        <p>Total Paket</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <i class="fas fa-ticket-alt"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3 id="pending-tickets-dash">0</h3>
+                        <p>Tiket Pending</p>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label>Kecepatan</label>
-                <input type="text" id="pkg-speed" class="form-control" required>
+
+            <div class="section-container">
+                <div class="section-header">
+                    <h3>Paket Terbaru</h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Nama Paket</th>
+                                <th>Harga</th>
+                                <th>Kecepatan</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dashboard-packages-body">
+                            <!-- JS Populated -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="form-group">
-                <label>Fitur (pisahkan dengan koma)</label>
-                <input type="text" id="pkg-features" class="form-control" required>
+        </section>
+
+        <!-- Packages Section -->
+        <section id="packages-section" style="display: none;">
+            <div class="section-container">
+                <div class="section-header">
+                    <h3>Manajemen Paket Internet</h3>
+                    <button class="btn-primary" onclick="openAddModal()">
+                        <i class="fas fa-plus"></i> Tambah Paket
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Nama Paket</th>
+                                <th>Harga</th>
+                                <th>Kecepatan</th>
+                                <th>Periode</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="packages-table-body">
+                            <!-- JS Populated -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div style="display: flex; gap: 1rem; justify-content: flex-end;">
-                <button type="button" class="btn btn-outline" onclick="closeModal()">Batal</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
+        </section>
+
+        <!-- Tickets Section -->
+        <section id="tickets-section" style="display: none;">
+            <div class="section-container">
+                <div class="section-header">
+                    <h3>Daftar Pengaduan</h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Tanggal</th>
+                                <th>Nama</th>
+                                <th>Masalah</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tickets-table-body">
+                            <!-- JS Populated -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </form>
+        </section>
+
+    </main>
+
+    <!-- Modal -->
+    <div id="package-modal" class="modal-overlay">
+        <div class="modal-card">
+            <h3 id="modal-title" style="margin-bottom: 1.5rem;">Tambah Paket</h3>
+            <form id="package-form">
+                <input type="hidden" id="pkg-id">
+                <div class="form-group">
+                    <label>Nama Paket</label>
+                    <input type="text" id="pkg-name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Harga (Contoh: Rp 150.000)</label>
+                    <input type="text" id="pkg-price" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Periode (Contoh: / Bulan)</label>
+                    <input type="text" id="pkg-period" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Kecepatan (Contoh: 20 Mbps)</label>
+                    <input type="text" id="pkg-speed" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label>Fitur (Pisahkan dengan koma)</label>
+                    <input type="text" id="pkg-features" class="form-control" required>
+                </div>
+                <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 2rem;">
+                    <button type="button" onclick="closeModal()"
+                        style="padding: 0.75rem 1.5rem; border: none; background: #F1F5F9; border-radius: 10px; cursor: pointer; font-weight: 600;">Batal</button>
+                    <button type="submit" class="btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<script src="admin.js"></script>
+    <script src="admin.js"></script>
 </body>
 
 </html>

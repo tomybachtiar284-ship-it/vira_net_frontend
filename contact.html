@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontak Kami - ViraNet</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="premium-contact.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <header class="navbar-transparent">
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <i class="fas fa-wifi"></i> Vira<span>Net</span>
+                </a>
+                <div class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Beranda</a></li>
+                    <li><a href="packages.html">Layanan</a></li>
+                    <li><a href="gallery.html">Galeri</a></li>
+                    <li><a href="coverage.html">Cakupan</a></li>
+                    <li><a href="member.html">Member</a></li>
+                    <li><a href="contact.html" class="active">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contact Hero Premium -->
+    <section class="contact-hero-premium">
+        <div class="container">
+            <div data-aos="fade-down">
+                <h1>Hubungi <span>Kami</span></h1>
+                <p>Tim support kami siap membantu Anda 24/7. Jangan ragu untuk menghubungi kami melalui channel di bawah
+                    ini.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section Premium -->
+    <section class="contact-section-premium">
+        <div class="container">
+            <div class="contact-grid-premium">
+
+                <!-- Left Column: Contact Info -->
+                <div class="contact-info-premium" data-aos="fade-right">
+                    <div class="glass-card">
+                        <h2 class="form-title">Informasi Kontak</h2>
+                        <p class="form-subtitle">Temukan kami di berbagai platform</p>
+
+                        <div class="contact-info-premium">
+                            <!-- WhatsApp -->
+                            <div class="contact-card-item">
+                                <div class="contact-icon-premium whatsapp">
+                                    <i class="fab fa-whatsapp"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h3>WhatsApp Support</h3>
+                                    <p>+62 852-1631-5002</p>
+                                    <a href="https://wa.me/6285216315002" class="contact-link-premium">Chat Sekarang <i
+                                            class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="contact-card-item">
+                                <div class="contact-icon-premium email">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h3>Email Resmi</h3>
+                                    <p>help@viranet.com</p>
+                                    <a href="mailto:help@viranet.com" class="contact-link-premium">Kirim Email <i
+                                            class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+
+                            <!-- Address -->
+                            <div class="contact-card-item">
+                                <div class="contact-icon-premium location">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="contact-details">
+                                    <h3>Kantor Pusat</h3>
+                                    <p>Jl. Merdeka No. 123, Ampana<br>Kabupaten Parigi Moutong</p>
+                                    <a href="#map" class="contact-link-premium">Lihat Peta <i
+                                            class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Message Form -->
+                <div class="contact-form-premium" data-aos="fade-left">
+                    <div class="glass-card">
+                        <h2 class="form-title">Kirim Pesan</h2>
+                        <p class="form-subtitle">Isi formulir di bawah dan kami akan membalas secepatnya</p>
+
+                        <form id="contact-form">
+                            <div class="form-group-premium">
+                                <input type="text" class="form-input-premium" id="name" placeholder=" " required>
+                                <label for="name" class="form-label-premium">Nama Lengkap</label>
+                            </div>
+
+                            <div class="form-group-premium">
+                                <input type="tel" class="form-input-premium" id="phone" placeholder=" " required>
+                                <label for="phone" class="form-label-premium">Nomor WhatsApp</label>
+                            </div>
+
+                            <div class="form-group-premium">
+                                <input type="text" class="form-input-premium" id="subject" placeholder=" " required>
+                                <label for="subject" class="form-label-premium">Subjek Pesan</label>
+                            </div>
+
+                            <div class="form-group-premium">
+                                <textarea class="form-input-premium form-textarea" id="message" placeholder=" "
+                                    required></textarea>
+                                <label for="message" class="form-label-premium">Isi Pesan</label>
+                            </div>
+
+                            <button type="submit" class="btn-submit-premium">
+                                <i class="fas fa-paper-plane"></i> Kirim Pesan
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Large Map -->
+            <div class="map-container-premium" id="map" data-aos="fade-up">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2225.228106307349!2d121.8594512!3d-0.411493!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2d87cdc000000005%3A0x6a257013e5d710a8!2sPolsek%20Una-Una!5e1!3m2!1sid!2sid!4v1763905217317!5m2!1sid!2sid"
+                    allowfullscreen="" loading="lazy">
+                </iframe>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 ViraNet. Solusi Internet Cepat & Stabil.</p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function () {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (mobileBtn) {
+            mobileBtn.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+        }
+
+        // Contact Form Logic
+        const contactForm = document.getElementById('contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const name = document.getElementById('name').value;
+                const phone = document.getElementById('phone').value;
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value;
+
+                const newTicket = {
+                    id: Date.now(),
+                    date: new Date().toLocaleDateString('id-ID'),
+                    name: name,
+                    phone: phone,
+                    issue: subject + ': ' + message,
+                    status: 'Pending'
+                };
+
+                // Get existing tickets
+                const tickets = JSON.parse(localStorage.getItem('viranet_tickets')) || [];
+                tickets.push(newTicket);
+                localStorage.setItem('viranet_tickets', JSON.stringify(tickets));
+
+                alert('Pesan Anda telah terkirim! Tim kami akan segera menghubungi Anda.');
+                contactForm.reset();
+            });
+        }
+    </script>
+</body>
+
+</html>

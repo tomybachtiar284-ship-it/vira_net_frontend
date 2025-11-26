@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paket Internet - ViraNet</title>
+    <title>Layanan & Paket - ViraNet</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="services.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -23,28 +24,271 @@
                 </div>
                 <ul class="nav-links">
                     <li><a href="index.html">Beranda</a></li>
-                    <li><a href="packages.html" class="active">Paket Internet</a></li>
-                    <li><a href="support.html">Bantuan</a></li>
-                    <li><a href="login.html" class="btn btn-primary" style="padding: 8px 20px;">Login Admin</a></li>
+                    <li><a href="packages.html" class="active">Layanan</a></li>
+                    <li><a href="gallery.html">Galeri</a></li>
+                    <li><a href="coverage.html">Cakupan</a></li>
+                    <li><a href="member.html">Member</a></li>
+                    <li><a href="contact.html">Kontak</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <section class="hero" style="min-height: 40vh; padding-top: 150px; padding-bottom: 50px;">
-        <div class="container" style="text-align: center;">
-            <div class="hero-text" style="width: 100%; max-width: 800px; margin: 0 auto;">
-                <h1>Pilihan Paket <br><span>Sesuai Kebutuhanmu</span></h1>
-                <p style="margin: 0 auto;">Temukan paket internet terbaik dengan harga terjangkau dan kualitas premium.
-                </p>
+    <!-- Hero Section -->
+    <section class="hero-service">
+        <div class="container">
+            <h1 class="scroll-reveal">Internet Cepat <br><span class="text-gradient">Tanpa Batas</span></h1>
+            <p class="scroll-reveal" style="transition-delay: 0.1s;">Pilih paket internet fiber optic terbaik untuk
+                kebutuhan rumah dan bisnis Anda. Stabil, cepat, dan terjangkau.</p>
+            <div class="scroll-reveal" style="transition-delay: 0.2s;">
+                <a href="#pricing" class="btn btn-primary">Lihat Paket</a>
             </div>
         </div>
     </section>
 
-    <section class="packages-section">
+    <!-- Pricing Section -->
+    <section id="pricing" class="section-padding">
         <div class="container">
-            <div class="features-grid" id="package-container">
-                <!-- Packages loaded via JS -->
+            <div class="section-title scroll-reveal">
+                <h2>Pilihan <span class="text-gradient">Paket</span></h2>
+                <p>Sesuaikan dengan kebutuhan digital Anda.</p>
+            </div>
+
+            <div class="pricing-grid">
+                <!-- Basic Package -->
+                <div class="pricing-card scroll-reveal" style="transition-delay: 0.1s;">
+                    <div class="pricing-header">
+                        <h3>Rumahan Basic</h3>
+                        <div class="price">150K<span>/bulan</span></div>
+                        <p style="color: #64748B; font-size: 0.9rem;">Cocok untuk browsing & sosmed</p>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check-circle"></i> Speed up to 10 Mbps</li>
+                        <li><i class="fas fa-check-circle"></i> Unlimited Kuota</li>
+                        <li><i class="fas fa-check-circle"></i> 1-3 Device</li>
+                        <li><i class="fas fa-check-circle"></i> Support Standard</li>
+                    </ul>
+                    <a href="https://wa.me/6285216315002?text=Saya%20tertarik%20paket%20Rumahan%20Basic"
+                        class="btn btn-outline" style="width: 100%; text-align: center;">Pilih Paket</a>
+                </div>
+
+                <!-- Pro Package (Popular) -->
+                <div class="pricing-card popular scroll-reveal" style="transition-delay: 0.2s;">
+                    <div class="popular-badge">Paling Laris</div>
+                    <div class="pricing-header">
+                        <h3>Rumahan Pro</h3>
+                        <div class="price">250K<span>/bulan</span></div>
+                        <p style="color: #64748B; font-size: 0.9rem;">Ideal untuk streaming & WFH</p>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check-circle"></i> Speed up to 20 Mbps</li>
+                        <li><i class="fas fa-check-circle"></i> Unlimited Kuota</li>
+                        <li><i class="fas fa-check-circle"></i> 4-7 Device</li>
+                        <li><i class="fas fa-check-circle"></i> Prioritas Support</li>
+                        <li><i class="fas fa-check-circle"></i> Free Instalasi</li>
+                    </ul>
+                    <a href="https://wa.me/6285216315002?text=Saya%20tertarik%20paket%20Rumahan%20Pro"
+                        class="btn btn-primary" style="width: 100%; text-align: center;">Pilih Paket</a>
+                </div>
+
+                <!-- Gamer Package -->
+                <div class="pricing-card scroll-reveal" style="transition-delay: 0.3s;">
+                    <div class="pricing-header">
+                        <h3>Gamer Elite</h3>
+                        <div class="price">350K<span>/bulan</span></div>
+                        <p style="color: #64748B; font-size: 0.9rem;">Performa maksimal tanpa lag</p>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check-circle"></i> Speed up to 50 Mbps</li>
+                        <li><i class="fas fa-check-circle"></i> Unlimited Kuota</li>
+                        <li><i class="fas fa-check-circle"></i> 10+ Device</li>
+                        <li><i class="fas fa-check-circle"></i> IP Public Static</li>
+                        <li><i class="fas fa-check-circle"></i> VIP Support 24/7</li>
+                    </ul>
+                    <a href="https://wa.me/6285216315002?text=Saya%20tertarik%20paket%20Gamer%20Elite"
+                        class="btn btn-outline" style="width: 100%; text-align: center;">Pilih Paket</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Table -->
+    <section class="comparison-section section-padding">
+        <div class="container">
+            <div class="section-title scroll-reveal">
+                <h2>Perbandingan <span class="text-gradient">Fitur</span></h2>
+                <p>Detail spesifikasi setiap paket layanan kami.</p>
+            </div>
+            <div class="comparison-wrapper scroll-reveal">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Fitur</th>
+                            <th>Basic</th>
+                            <th>Pro</th>
+                            <th>Elite</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Kecepatan Download</td>
+                            <td>10 Mbps</td>
+                            <td>20 Mbps</td>
+                            <td>50 Mbps</td>
+                        </tr>
+                        <tr>
+                            <td>Kecepatan Upload</td>
+                            <td>2 Mbps</td>
+                            <td>5 Mbps</td>
+                            <td>10 Mbps</td>
+                        </tr>
+                        <tr>
+                            <td>FUP (Fair Usage Policy)</td>
+                            <td>True Unlimited</td>
+                            <td>True Unlimited</td>
+                            <td>True Unlimited</td>
+                        </tr>
+                        <tr>
+                            <td>SLA (Service Level Agreement)</td>
+                            <td>95%</td>
+                            <td>98%</td>
+                            <td>99.9%</td>
+                        </tr>
+                        <tr>
+                            <td>IP Public</td>
+                            <td><i class="fas fa-times" style="color: #EF4444;"></i></td>
+                            <td>Dynamic</td>
+                            <td>Static</td>
+                        </tr>
+                        <tr>
+                            <td>Router WiFi</td>
+                            <td>Standard (N300)</td>
+                            <td>Dual Band (AC1200)</td>
+                            <td>High Power (AX1800)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Coverage Check -->
+    <section class="section-padding" style="background: #F8FAFC;">
+        <div class="container">
+            <div class="section-title scroll-reveal">
+                <h2>Cek Ketersediaan <span class="text-gradient">Area</span></h2>
+                <p>Pastikan lokasi Anda terjangkau oleh jaringan fiber optik kami.</p>
+            </div>
+            <div class="coverage-card scroll-reveal">
+                <iframe class="map-frame-modern"
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d975.4783250341538!2d120.96201978863546!3d0.5171681681169321!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sid!2sid!4v1764162177239!5m2!1sid!2sid"
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="https://wa.me/6285216315002?text=Halo%20ViraNet,%20tolong%20cek%20coverage%20di%20lokasi%20saya"
+                        class="btn btn-primary" style="padding: 1rem 2rem; border-radius: 50px;">
+                        <i class="fas fa-map-marker-alt"></i> Cek Lokasi Saya via WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Installation -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-title scroll-reveal">
+                <h2>Galeri <span class="text-gradient">Instalasi</span></h2>
+                <p>Dokumentasi profesional pemasangan perangkat di lokasi pelanggan.</p>
+            </div>
+            <div class="gallery-grid-modern">
+                <div class="gallery-card-modern scroll-reveal" style="transition-delay: 0.1s;">
+                    <img src="assets/technician_mikrotik.png" alt="Instalasi Mikrotik">
+                    <div class="gallery-overlay-modern">
+                        <div class="gallery-info">
+                            <h3>Setup Mikrotik</h3>
+                            <p>Konfigurasi router manajemen bandwidth</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-card-modern scroll-reveal" style="transition-delay: 0.2s;">
+                    <img src="assets/technician_cable.png" alt="Pemasangan Kabel">
+                    <div class="gallery-overlay-modern">
+                        <div class="gallery-info">
+                            <h3>Fiber Optic</h3>
+                            <p>Instalasi kabel fiber yang rapi</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-card-modern scroll-reveal" style="transition-delay: 0.3s;">
+                    <img src="assets/network_tower.png" alt="Tower Jaringan">
+                    <div class="gallery-overlay-modern">
+                        <div class="gallery-info">
+                            <h3>Infrastruktur</h3>
+                            <p>Tower pemancar utama coverage luas</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section-padding" style="background: #F1F5F9;">
+        <div class="container">
+            <div class="section-title scroll-reveal">
+                <h2>Pertanyaan <span class="text-gradient">Umum</span></h2>
+                <p>Jawaban untuk hal-hal yang sering ditanyakan.</p>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item active scroll-reveal">
+                    <div class="faq-question">
+                        Apakah ada biaya pemasangan?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Untuk paket Rumahan Basic dan Pro, biaya instalasi GRATIS selama masa promo. Untuk paket
+                        harian/mingguan, pelanggan perlu memiliki perangkat penerima sendiri atau menyewa.
+                    </div>
+                </div>
+                <div class="faq-item scroll-reveal">
+                    <div class="faq-question">
+                        Berapa lama proses aktivasi?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Proses survei dan instalasi biasanya memakan waktu 1-3 hari kerja setelah pendaftaran,
+                        tergantung antrian dan lokasi.
+                    </div>
+                </div>
+                <div class="faq-item scroll-reveal">
+                    <div class="faq-question">
+                        Bagaimana cara pembayarannya?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Pembayaran bisa dilakukan via Transfer Bank (BCA, Mandiri, BRI), E-Wallet (OVO, Dana, GoPay),
+                        atau bayar tunai di kantor kami.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="cta-content scroll-reveal"
+                style="background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); padding: 4rem; border-radius: 30px; text-align: center; color: #fff; position: relative; overflow: hidden; box-shadow: var(--shadow-xl);">
+                <div
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at top right, rgba(6, 182, 212, 0.2), transparent); pointer-events: none;">
+                </div>
+                <h2 style="font-size: 2.5rem; margin-bottom: 1rem; position: relative; z-index: 1;">Siap Berlangganan?
+                </h2>
+                <p style="color: #94A3B8; margin-bottom: 2rem; font-size: 1.1rem; position: relative; z-index: 1;">
+                    Jangan ragu untuk menghubungi kami jika Anda memiliki pertanyaan lebih lanjut.</p>
+                <a href="contact.html" class="btn btn-primary"
+                    style="padding: 1rem 3rem; font-size: 1.1rem; border-radius: 50px; position: relative; z-index: 1;">Hubungi
+                    Kami</a>
             </div>
         </div>
     </section>
@@ -69,8 +313,8 @@
                 <div class="footer-col">
                     <h4>Bantuan</h4>
                     <ul class="footer-links">
-                        <li><a href="support.html">Cek Gangguan</a></li>
-                        <li><a href="support.html">Lapor Masalah</a></li>
+                        <li><a href="contact.html">Cek Gangguan</a></li>
+                        <li><a href="contact.html">Lapor Masalah</a></li>
                         <li><a href="https://wa.me/6285216315002">Chat WhatsApp</a></li>
                     </ul>
                 </div>
