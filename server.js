@@ -1,18 +1,30 @@
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
+const helmet = require('helmet');
+const compression = require('compression');
+const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
-// Middleware
+// Security & Performance Middleware
+app.use(helmet()); // Protects against common vulnerabilities (XSS, etc)
+app.use(compression()); // Compresses responses for faster load
+
+// Rate Limiting (Prevent Brute Force)
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100 // limit each IP to 100 requests per windowMs
+});
+app.use(limiter);
+
+// General Middleware
 app.use(cors());
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
-// Middleware
-app.use(cors());
 app.use(express.json());
 
 const JWT_SECRET = process.env.JWT_SECRET || 'viranet_secret_key_123';
