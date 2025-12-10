@@ -8,7 +8,29 @@ const port = 3000;
 
 // Middleware
 app.use(cors());
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+
+// Middleware
+app.use(cors());
 app.use(express.json());
+
+const JWT_SECRET = process.env.JWT_SECRET || 'viranet_secret_key_123';
+
+// Auth Middleware
+function authenticateToken(req, res, next) {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+
+    if (!token) return res.sendStatus(401);
+
+    jwt.verify(token, JWT_SECRET, (err, user) => {
+        if (err) return res.sendStatus(403);
+        req.user = user;
+        next();
+    });
+}
+
 
 // Database Connection Pool
 const pool = mysql.createPool({
@@ -29,6 +51,48 @@ pool.getConnection((err, connection) => {
         console.log('Successfully connected to MySQL database!');
         connection.release();
     }
+});
+
+// ==========================================
+// AUTH ROUTES
+// ==========================================
+
+app.post('/api/auth/login', (req, res) => {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+        return res.status(400).json({ error: 'Email and password are required' });
+    }
+
+    pool.query('SELECT * FROM users WHERE email = ?', [email], async (error, results) => {
+        if (error) return res.status(500).json({ error: error.message });
+
+        if (results.length === 0) {
+            return res.status(401).json({ error: 'Invalid credentials' });
+        }
+
+        const user = results[0];
+
+        // Check password (handle both hashed and potentially plain text for legacy/dev)
+        let validPassword = false;
+
+        // Try bcrypt compare first
+        if (user.password.startsWith('$2')) {
+            validPassword = await bcrypt.compare(password, user.password);
+        } else {
+            // Fallback for plain text (development only, should be removed in prod)
+            validPassword = (password === user.password);
+        }
+
+        if (!validPassword) {
+            return res.status(401).json({ error: 'Invalid credentials' });
+        }
+
+        // Generate Token
+        const token = jwt.sign({ id: user.id, username: user.username }, JWT_SECRET, { expiresIn: '1h' });
+
+        res.json({ message: 'Login successful', token, user: { username: user.username, email: user.email } });
+    });
 });
 
 // ==========================================

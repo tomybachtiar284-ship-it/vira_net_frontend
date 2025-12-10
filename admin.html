@@ -11,6 +11,13 @@
 </head>
 
 <body>
+    <script>
+        // Auth Check
+        const token = localStorage.getItem('admin_token');
+        if (!token) {
+            window.location.href = 'login.html';
+        }
+    </script>
 
     <!-- Sidebar -->
     <aside class="sidebar">

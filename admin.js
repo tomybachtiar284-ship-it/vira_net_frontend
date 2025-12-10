@@ -30,9 +30,13 @@ if (loginForm) {
     });
 }
 
+// Logout Function
 function logout() {
-    localStorage.removeItem('viranet_admin_logged_in');
-    window.location.href = 'login.html';
+    if (confirm('Apakah Anda yakin ingin keluar?')) {
+        localStorage.removeItem('admin_token');
+        localStorage.removeItem('admin_user');
+        window.location.href = 'login.html';
+    }
 }
 
 // Dashboard Logic
