@@ -181,33 +181,48 @@
             });
         }
 
-        // Contact Form Logic
+        // Contact Form Logic (Connected to API)
         const contactForm = document.getElementById('contact-form');
+        const API_URL = 'http://localhost:3000/api';
+
         if (contactForm) {
-            contactForm.addEventListener('submit', (e) => {
+            contactForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
 
-                const name = document.getElementById('name').value;
-                const phone = document.getElementById('phone').value;
-                const subject = document.getElementById('subject').value;
-                const message = document.getElementById('message').value;
+                const submitBtn = contactForm.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengirim...';
+                submitBtn.disabled = true;
 
-                const newTicket = {
-                    id: Date.now(),
-                    date: new Date().toLocaleDateString('id-ID'),
-                    name: name,
-                    phone: phone,
-                    issue: subject + ': ' + message,
-                    status: 'Pending'
+                const payload = {
+                    name: document.getElementById('name').value,
+                    phone: document.getElementById('phone').value,
+                    subject: document.getElementById('subject').value,
+                    message: document.getElementById('message').value
                 };
 
-                // Get existing tickets
-                const tickets = JSON.parse(localStorage.getItem('viranet_tickets')) || [];
-                tickets.push(newTicket);
-                localStorage.setItem('viranet_tickets', JSON.stringify(tickets));
+                try {
+                    const response = await fetch(`${API_URL}/complaints`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    });
 
-                alert('Pesan Anda telah terkirim! Tim kami akan segera menghubungi Anda.');
-                contactForm.reset();
+                    if (response.ok) {
+                        alert('✅ Pesan Anda telah terkirim ke Database! Tim kami akan segera menghubungi Anda.');
+                        contactForm.reset();
+                    } else {
+                        throw new Error('Gagal mengirim pesan');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('❌ Terjadi kesalahan saat mengirim pesan. Pastikan server Backend menyala.');
+                } finally {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }
             });
         }
     </script>

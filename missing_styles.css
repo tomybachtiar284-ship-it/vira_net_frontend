@@ -1,0 +1,273 @@
+/* =========================================
+   PREMIUM COVERAGE PAGE STYLES
+   ========================================= */
+
+/* Coverage Hero Premium */
+.coverage-hero-premium {
+    padding: 180px 0 100px;
+    background: radial-gradient(circle at top right, #1E293B 0%, #0F172A 100%);
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+}
+
+.coverage-hero-premium::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: pulse-slow 8s infinite ease-in-out;
+}
+
+.coverage-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.coverage-hero-text h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+}
+
+.coverage-hero-text h1 span {
+    background: linear-gradient(to right, var(--primary), #3B82F6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.coverage-hero-text p {
+    color: #94A3B8;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.coverage-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.coverage-stat-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 20px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.coverage-stat-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-5px);
+    border-color: var(--primary);
+}
+
+.stat-number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    color: #CBD5E1;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Check Availability Section */
+.check-availability-section {
+    padding: 80px 0;
+    background: #F8FAFC;
+    margin-top: -50px;
+    position: relative;
+    z-index: 10;
+    border-radius: 40px 40px 0 0;
+}
+
+.availability-card {
+    background: #fff;
+    padding: 3rem;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 5rem;
+    border: 1px solid #F1F5F9;
+}
+
+.availability-form {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.availability-input {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    border: 2px solid #E2E8F0;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+.availability-input:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+}
+
+.btn-check {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-check:hover {
+    background: #0891B2;
+    transform: translateY(-2px);
+}
+
+/* Area Grid Premium */
+.area-grid-premium {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.area-card-premium {
+    background: #fff;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+    border: 1px solid #F1F5F9;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.area-card-premium:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px -5px rgba(6, 182, 212, 0.15);
+    border-color: rgba(6, 182, 212, 0.3);
+}
+
+.area-icon {
+    width: 60px;
+    height: 60px;
+    background: #ECFEFF;
+    color: var(--primary);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: 0.3s;
+}
+
+.area-card-premium:hover .area-icon {
+    background: var(--primary);
+    color: #fff;
+    transform: rotate(10deg);
+}
+
+.area-card-premium h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: #1E293B;
+}
+
+.area-list {
+    list-style: none;
+    margin-bottom: 1.5rem;
+}
+
+.area-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #64748B;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.area-list li i {
+    color: #10B981;
+    font-size: 0.8rem;
+}
+
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.status-badge.active {
+    background: #ECFDF5;
+    color: #059669;
+}
+
+.status-badge.soon {
+    background: #FFFBEB;
+    color: #D97706;
+}
+
+/* Map Section Premium */
+.map-section-premium {
+    padding: 0 0 100px;
+    background: #F8FAFC;
+}
+
+.map-card-premium {
+    background: #fff;
+    border-radius: 24px;
+    padding: 1rem;
+    box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.05);
+    height: 500px;
+    overflow: hidden;
+}
+
+.map-card-premium iframe {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    border: none;
+}
+
+@media (max-width: 768px) {
+    .coverage-hero-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: center;
+    }
+
+    .coverage-hero-text h1 {
+        font-size: 2.5rem;
+    }
+
+    .availability-form {
+        flex-direction: column;
+    }
+}

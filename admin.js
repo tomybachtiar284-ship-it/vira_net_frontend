@@ -48,25 +48,20 @@ if (window.location.pathname.includes('admin.html')) {
 
         renderPackages();
         renderTickets();
-        updateDashboard();
     });
 
     // Navigation
     window.showSection = function (sectionId) {
-        // Hide all sections
         document.getElementById('dashboard-section').style.display = 'none';
         document.getElementById('packages-section').style.display = 'none';
         document.getElementById('tickets-section').style.display = 'none';
 
-        // Show selected
         document.getElementById(sectionId + '-section').style.display = 'block';
 
-        // Update Sidebar
         document.querySelectorAll('.sidebar-menu a').forEach(a => a.classList.remove('active'));
         const navItem = document.getElementById('nav-' + sectionId);
         if (navItem) navItem.classList.add('active');
 
-        // Update Page Title
         const titles = {
             'dashboard': 'Dashboard',
             'packages': 'Paket Internet',
@@ -75,22 +70,51 @@ if (window.location.pathname.includes('admin.html')) {
         document.getElementById('page-title').innerText = titles[sectionId];
     };
 
-    function updateDashboard() {
-        const pkgs = getPackages();
-        const tickets = getTickets();
-        const pending = tickets.filter(t => t.status === 'Pending').length;
+    // --- PACKAGES CRUD (Real API) ---
+    const API_URL = 'http://localhost:3000/api';
 
-        // Update Stats
-        document.getElementById('total-packages-dash').innerText = pkgs.length;
-        document.getElementById('pending-tickets-dash').innerText = pending;
+    async function fetchPackages() {
+        try {
+            const res = await fetch(`${API_URL}/packages`);
+            return await res.json();
+        } catch (err) {
+            console.error(err);
+            return [];
+        }
+    }
 
-        // Populate Dashboard Packages Preview
-        const dashPkgBody = document.getElementById('dashboard-packages-body');
-        if (dashPkgBody) {
-            dashPkgBody.innerHTML = pkgs.slice(0, 5).map(p => `
+    async function renderPackages() {
+        const tbody = document.getElementById('packages-table-body');
+        const dashBody = document.getElementById('dashboard-packages-body');
+        const countEl = document.getElementById('total-packages-dash');
+
+        const packages = await fetchPackages();
+
+        if (countEl) countEl.innerText = packages.length;
+
+        // Render Admin Table
+        if (tbody) {
+            tbody.innerHTML = packages.map(p => `
                 <tr>
                     <td style="font-weight: 600;">${p.name}</td>
-                    <td>${p.price}</td>
+                    <td>Rp ${p.price.toLocaleString('id-ID')}</td>
+                    <td>${p.speed}</td>
+                    <td>${p.period}</td>
+                    <td>
+                        <button class="action-btn btn-delete" onclick="deletePackage(${p.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Render Dashboard Preview
+        if (dashBody) {
+            dashBody.innerHTML = packages.slice(0, 5).map(p => `
+                <tr>
+                    <td style="font-weight: 600;">${p.name}</td>
+                    <td>Rp ${p.price.toLocaleString('id-ID')}</td>
                     <td>${p.speed}</td>
                     <td><span class="status-badge active">Active</span></td>
                 </tr>
@@ -98,46 +122,56 @@ if (window.location.pathname.includes('admin.html')) {
         }
     }
 
-    // --- PACKAGES CRUD ---
-    function getPackages() {
-        let pkgs = JSON.parse(localStorage.getItem('viranet_packages'));
-        if (!pkgs || pkgs.length === 0) {
-            // Default data matching main.js
-            pkgs = [
-                { id: 1, name: 'Paket Harian', price: 'Rp 5.000', period: '/ 24 Jam', speed: '10 Mbps', features: ['Unlimited Quota', 'No FUP', 'Game & Stream Lancar', '1 Device'], type: 'voucher' },
-                { id: 2, name: 'Paket Mingguan', price: 'Rp 30.000', period: '/ 7 Hari', speed: '15 Mbps', features: ['Unlimited Quota', 'No FUP', 'Game & Stream Lancar', '2 Devices'], type: 'voucher' },
-                { id: 3, name: 'Rumahan Basic', price: 'Rp 150.000', period: '/ Bulan', speed: '20 Mbps', features: ['Unlimited Quota', 'Router Pinjaman', 'Free Instalasi', 'Support 24/7'], type: 'monthly' },
-                { id: 4, name: 'Rumahan Pro', price: 'Rp 250.000', period: '/ Bulan', speed: '50 Mbps', features: ['Unlimited Quota', 'Router Dual Band', 'Free Instalasi', 'Prioritas Support'], type: 'monthly' }
-            ];
-            localStorage.setItem('viranet_packages', JSON.stringify(pkgs));
+    // Add Package
+    const pkgForm = document.getElementById('package-form');
+    if (pkgForm) {
+        pkgForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const payload = {
+                name: document.getElementById('pkg-name').value,
+                price: document.getElementById('pkg-price').value.replace(/\D/g, ''), // Remove non-numeric
+                period: document.getElementById('pkg-period').value,
+                speed: document.getElementById('pkg-speed').value,
+                features: document.getElementById('pkg-features').value
+            };
+
+            try {
+                const res = await fetch(`${API_URL}/packages`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (res.ok) {
+                    alert('Paket berhasil ditambahkan!');
+                    closeModal();
+                    renderPackages();
+                } else {
+                    alert('Gagal menambah paket.');
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Terjadi kesalahan koneksi.');
+            }
+        });
+    }
+
+    // Delete Package
+    window.deletePackage = async function (id) {
+        if (confirm('Yakin hapus paket ini dari database?')) {
+            try {
+                await fetch(`${API_URL}/packages/${id}`, { method: 'DELETE' });
+                renderPackages();
+            } catch (err) {
+                alert('Gagal menghapus paket.');
+            }
         }
-        return pkgs;
-    }
+    };
 
-    function renderPackages() {
-        const tbody = document.getElementById('packages-table-body');
-        if (!tbody) return;
-
-        const pkgs = getPackages();
-        tbody.innerHTML = pkgs.map(p => `
-            <tr>
-                <td style="font-weight: 600;">${p.name}</td>
-                <td>${p.price}</td>
-                <td>${p.speed}</td>
-                <td>${p.period}</td>
-                <td>
-                    <button class="action-btn btn-edit" onclick="editPackage(${p.id})"><i class="fas fa-edit"></i></button>
-                    <button class="action-btn btn-delete" onclick="deletePackage(${p.id})"><i class="fas fa-trash"></i></button>
-                </td>
-            </tr>
-        `).join('');
-        updateDashboard();
-    }
-
+    // Modal Functions
     window.openAddModal = function () {
         document.getElementById('package-form').reset();
-        document.getElementById('pkg-id').value = '';
-        document.getElementById('modal-title').innerText = 'Tambah Paket';
         document.getElementById('package-modal').style.display = 'flex';
     };
 
@@ -145,90 +179,53 @@ if (window.location.pathname.includes('admin.html')) {
         document.getElementById('package-modal').style.display = 'none';
     };
 
-    window.editPackage = function (id) {
-        const pkgs = getPackages();
-        const p = pkgs.find(x => x.id === id);
-        if (p) {
-            document.getElementById('pkg-id').value = p.id;
-            document.getElementById('pkg-name').value = p.name;
-            document.getElementById('pkg-price').value = p.price;
-            document.getElementById('pkg-period').value = p.period;
-            document.getElementById('pkg-speed').value = p.speed;
-            document.getElementById('pkg-features').value = p.features.join(', ');
-            document.getElementById('modal-title').innerText = 'Edit Paket';
-            document.getElementById('package-modal').style.display = 'flex';
-        }
-    };
-
-    window.deletePackage = function (id) {
-        if (confirm('Yakin hapus paket ini?')) {
-            let pkgs = getPackages();
-            pkgs = pkgs.filter(x => x.id !== id);
-            localStorage.setItem('viranet_packages', JSON.stringify(pkgs));
-            renderPackages();
-        }
-    };
-
-    const pkgForm = document.getElementById('package-form');
-    if (pkgForm) {
-        pkgForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const id = document.getElementById('pkg-id').value;
-            const name = document.getElementById('pkg-name').value;
-            const price = document.getElementById('pkg-price').value;
-            const period = document.getElementById('pkg-period').value;
-            const speed = document.getElementById('pkg-speed').value;
-            const features = document.getElementById('pkg-features').value.split(',').map(s => s.trim());
-
-            let pkgs = getPackages();
-            if (id) {
-                const idx = pkgs.findIndex(x => x.id == id);
-                if (idx !== -1) pkgs[idx] = { ...pkgs[idx], name, price, period, speed, features };
-            } else {
-                const newId = pkgs.length > 0 ? Math.max(...pkgs.map(p => p.id)) + 1 : 1;
-                pkgs.push({ id: newId, name, price, period, speed, features, type: 'custom' });
-            }
-            localStorage.setItem('viranet_packages', JSON.stringify(pkgs));
-            closeModal();
-            renderPackages();
-        });
-    }
-
-    // --- TICKETS LOGIC ---
-    function getTickets() {
-        return JSON.parse(localStorage.getItem('viranet_tickets')) || [];
-    }
-
-    function renderTickets() {
+    // --- COMPLAINTS/TICKETS (Real API) ---
+    async function renderTickets() {
         const tbody = document.getElementById('tickets-table-body');
-        if (!tbody) return;
+        const countEl = document.getElementById('pending-tickets-dash');
 
-        const tickets = getTickets();
-        if (tickets.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; padding: 2rem; color: #94A3B8;">Belum ada pengaduan.</td></tr>';
-        } else {
-            tbody.innerHTML = tickets.map(t => `
-                <tr>
-                    <td>${t.date}</td>
-                    <td style="font-weight: 600;">${t.name}</td>
-                    <td>${t.issue}</td>
-                    <td><span class="status-badge ${t.status === 'Pending' ? 'pending' : 'active'}">${t.status}</span></td>
-                    <td>
-                        ${t.status === 'Pending' ? `<button class="action-btn btn-check" onclick="solveTicket(${t.id})"><i class="fas fa-check"></i></button>` : '-'}
-                    </td>
-                </tr>
-            `).join('');
+        try {
+            const res = await fetch(`${API_URL}/complaints`);
+            const tickets = await res.json();
+
+            const pending = tickets.filter(t => t.status === 'Pending').length;
+            if (countEl) countEl.innerText = pending;
+
+            if (tbody) {
+                if (tickets.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;">Belum ada pengaduan.</td></tr>';
+                } else {
+                    tbody.innerHTML = tickets.map(t => `
+                        <tr>
+                            <td>${new Date(t.created_at).toLocaleDateString()}</td>
+                            <td style="font-weight: 600;">${t.name}<br><small style="color:#666">${t.phone}</small></td>
+                            <td><b>${t.subject}</b><br>${t.message}</td>
+                            <td><span class="status-badge ${t.status === 'Pending' ? 'pending' : 'active'}">${t.status}</span></td>
+                            <td>
+                                ${t.status === 'Pending' ? `
+                                <button class="action-btn btn-check" onclick="updateTicketStatus(${t.id}, 'Selesai')">
+                                    <i class="fas fa-check"></i>
+                                </button>` : '-'}
+                            </td>
+                        </tr>
+                    `).join('');
+                }
+            }
+        } catch (err) {
+            console.error('Error fetching tickets:', err);
         }
-        updateDashboard();
     }
 
-    window.solveTicket = function (id) {
-        let tickets = getTickets();
-        const idx = tickets.findIndex(t => t.id === id);
-        if (idx !== -1) {
-            tickets[idx].status = 'Selesai';
-            localStorage.setItem('viranet_tickets', JSON.stringify(tickets));
+    window.updateTicketStatus = async function (id, status) {
+        try {
+            await fetch(`${API_URL}/complaints/${id}/status`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ status })
+            });
             renderTickets();
+        } catch (err) {
+            alert('Gagal mengupdate status.');
         }
     };
 }
