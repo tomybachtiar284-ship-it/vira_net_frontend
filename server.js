@@ -8,6 +8,7 @@ require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 3000;
+app.set('trust proxy', 1); // Trust proxy is required when running behind a proxy like Railway/Heroku
 
 // Security & Performance Middleware
 app.use(helmet()); // Protects against common vulnerabilities (XSS, etc)
@@ -16,7 +17,8 @@ app.use(compression()); // Compresses responses for faster load
 // Rate Limiting (Prevent Brute Force)
 const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100 // limit each IP to 100 requests per windowMs
+    max: 1000, // Increased limit to prevent false positives during testing
+    message: 'Too many requests, please try again later.'
 });
 app.use(limiter);
 
