@@ -112,9 +112,14 @@ app.post('/api/auth/login', (req, res) => {
 // ==========================================
 
 // TEST ROUTE
-app.get('/', (req, res) => {
-    res.send('<h1>Backend ViraNet Berjalan Normal! 🚀</h1><p>Silakan kembali ke <a href="http://127.0.0.1:5501/admin.html">Admin Dashboard</a> untuk mengelola data.</p>');
-});
+// Serve static files from 'public' directory
+const path = require('path');
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Fallback for SPA (if needed, but for now just serve index.html on root)
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// });
 
 app.get('/api/test-db', (req, res) => {
     pool.query('SELECT 1 + 1 AS solution', (error, results) => {
