@@ -80,6 +80,7 @@
                 // Simpan sesi login
                 localStorage.setItem('viranet_admin_logged_in', 'true');
                 localStorage.setItem('viranet_admin_username', username);
+                localStorage.setItem('admin_token', 'dummy_token_hardcoded'); // Prevent redirect loop
 
                 // Redirect ke dashboard
                 window.location.href = 'admin.html';

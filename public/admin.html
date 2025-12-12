@@ -13,8 +13,9 @@
 <body>
     <script>
         // Auth Check
-        const token = localStorage.getItem('admin_token');
-        if (!token) {
+        // Check for the flag set by login.html (Hardcoded or API)
+        const isLoggedIn = localStorage.getItem('viranet_admin_logged_in') === 'true';
+        if (!isLoggedIn) {
             window.location.href = 'login.html';
         }
     </script>
