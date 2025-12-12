@@ -72,13 +72,14 @@ pool.getConnection((err, connection) => {
 // ==========================================
 
 app.post('/api/auth/login', (req, res) => {
-    const { email, password } = req.body;
+    const { email, username, password } = req.body;
+    const loginKey = email || username;
 
-    if (!email || !password) {
-        return res.status(400).json({ error: 'Email and password are required' });
+    if (!loginKey || !password) {
+        return res.status(400).json({ error: 'Email/Username and password are required' });
     }
 
-    pool.query('SELECT * FROM users WHERE email = ?', [email], async (error, results) => {
+    pool.query('SELECT * FROM users WHERE email = ? OR username = ?', [loginKey, loginKey], async (error, results) => {
         if (error) return res.status(500).json({ error: error.message });
 
         if (results.length === 0) {

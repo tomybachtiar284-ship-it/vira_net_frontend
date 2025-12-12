@@ -63,23 +63,52 @@
     </div>
 
     <script>
-        document.getElementById('login-form').addEventListener('submit', (e) => {
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
             e.preventDefault();
 
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const errorMsg = document.getElementById('login-error');
+            const submitBtn = document.querySelector('button[type="submit"]');
 
-            if (username === 'admin' && password === 'admin') {
-                // Set the key that admin.js checks for
-                localStorage.setItem('viranet_admin_logged_in', 'true');
-                localStorage.setItem('viranet_admin_username', username);
+            // Reset error
+            errorMsg.style.display = 'none';
+            submitBtn.textContent = 'Loading...';
+            submitBtn.disabled = true;
 
-                // Redirect
-                window.location.href = 'admin.html';
-            } else {
+            try {
+                // Send as 'username' to match backend logic (which checks both email or username)
+                const response = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username: username, password: password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    // Save token
+                    localStorage.setItem('admin_token', data.token);
+                    localStorage.setItem('admin_user', JSON.stringify(data.user));
+
+                    // Also set the flag for admin.js simple check compatibility
+                    localStorage.setItem('viranet_admin_logged_in', 'true');
+                    localStorage.setItem('viranet_admin_username', data.user.username);
+
+                    // Redirect
+                    window.location.href = 'admin.html';
+                } else {
+                    throw new Error(data.error || 'Login failed');
+                }
+
+            } catch (error) {
+                console.error(error);
+                errorMsg.textContent = error.message || 'Username atau password salah!';
                 errorMsg.style.display = 'block';
-                errorMsg.textContent = 'Username atau password salah!';
+                submitBtn.textContent = 'Masuk Dashboard';
+                submitBtn.disabled = false;
             }
         });
     </script>
