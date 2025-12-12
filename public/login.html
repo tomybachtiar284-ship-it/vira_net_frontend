@@ -63,7 +63,7 @@
     </div>
 
     <script>
-        document.getElementById('login-form').addEventListener('submit', async (e) => {
+        document.getElementById('login-form').addEventListener('submit', (e) => {
             e.preventDefault();
 
             const username = document.getElementById('username').value;
@@ -71,44 +71,28 @@
             const errorMsg = document.getElementById('login-error');
             const submitBtn = document.querySelector('button[type="submit"]');
 
-            // Reset error
-            errorMsg.style.display = 'none';
-            submitBtn.textContent = 'Loading...';
-            submitBtn.disabled = true;
+            // --- KONFIGURASI USERNAME DAN PASSWORD DI SINI ---
+            const validUsername = 'admin';
+            const validPassword = 'admin';
+            // ------------------------------------------------
 
-            try {
-                // Send as 'username' to match backend logic (which checks both email or username)
-                const response = await fetch('/api/auth/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ username: username, password: password })
-                });
+            if (username === validUsername && password === validPassword) {
+                // Simpan sesi login
+                localStorage.setItem('viranet_admin_logged_in', 'true');
+                localStorage.setItem('viranet_admin_username', username);
 
-                const data = await response.json();
-
-                if (response.ok) {
-                    // Save token
-                    localStorage.setItem('admin_token', data.token);
-                    localStorage.setItem('admin_user', JSON.stringify(data.user));
-
-                    // Also set the flag for admin.js simple check compatibility
-                    localStorage.setItem('viranet_admin_logged_in', 'true');
-                    localStorage.setItem('viranet_admin_username', data.user.username);
-
-                    // Redirect
-                    window.location.href = 'admin.html';
-                } else {
-                    throw new Error(data.error || 'Login failed');
-                }
-
-            } catch (error) {
-                console.error(error);
-                errorMsg.textContent = error.message || 'Username atau password salah!';
+                // Redirect ke dashboard
+                window.location.href = 'admin.html';
+            } else {
+                // Tampilkan pesan error
                 errorMsg.style.display = 'block';
-                submitBtn.textContent = 'Masuk Dashboard';
-                submitBtn.disabled = false;
+                errorMsg.textContent = 'Username atau password salah!';
+
+                // Reset tombol loading jika ada
+                if (submitBtn) {
+                    submitBtn.textContent = 'Masuk Dashboard';
+                    submitBtn.disabled = false;
+                }
             }
         });
     </script>
