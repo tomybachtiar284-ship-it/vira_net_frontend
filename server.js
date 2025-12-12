@@ -57,15 +57,74 @@ const pool = mysql.createPool({
     queueLimit: 0
 });
 
-// Test Database Connection
+// Test Database Connection & Initialize
 pool.getConnection((err, connection) => {
     if (err) {
         console.error('Error connecting to MySQL database:', err);
     } else {
         console.log('Successfully connected to MySQL database!');
+        initializeDatabase(connection);
         connection.release();
     }
 });
+
+async function initializeDatabase(connection) {
+    try {
+        // 1. Create Users Table
+        await connection.promise().query(`
+            CREATE TABLE IF NOT EXISTS users (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                username VARCHAR(50) NOT NULL,
+                email VARCHAR(100) NOT NULL UNIQUE,
+                password VARCHAR(255) NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        `);
+
+        // 2. Create Default Admin if not exists
+        const [users] = await connection.promise().query("SELECT * FROM users WHERE username = 'Admin' OR email = 'admin@viranet.com'");
+        if (users.length === 0) {
+            console.log('Creating default admin user...');
+            const hashedPassword = await bcrypt.hash('admin123', 10);
+            await connection.promise().query(
+                'INSERT INTO users (username, email, password) VALUES (?, ?, ?)',
+                ['Admin', 'admin@viranet.com', hashedPassword]
+            );
+            console.log('Default admin user created.');
+        }
+
+        // 3. Create Packages Table
+        await connection.promise().query(`
+            CREATE TABLE IF NOT EXISTS packages (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                name VARCHAR(100) NOT NULL,
+                price DECIMAL(10, 0) NOT NULL,
+                speed VARCHAR(50) NOT NULL,
+                features TEXT,
+                period VARCHAR(20) DEFAULT '/bulan',
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        `);
+
+        // 4. Create Complaints Table
+        await connection.promise().query(`
+            CREATE TABLE IF NOT EXISTS complaints (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                name VARCHAR(100) NOT NULL,
+                phone VARCHAR(20) NOT NULL,
+                subject VARCHAR(150) NOT NULL,
+                message TEXT NOT NULL,
+                status ENUM('Pending', 'Proses', 'Selesai') DEFAULT 'Pending',
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        `);
+
+        console.log('Database initialized successfully.');
+
+    } catch (error) {
+        console.error('Database initialization failed:', error);
+    }
+}
 
 // ==========================================
 // AUTH ROUTES
@@ -107,6 +166,41 @@ app.post('/api/auth/login', (req, res) => {
         const token = jwt.sign({ id: user.id, username: user.username }, JWT_SECRET, { expiresIn: '1h' });
 
         res.json({ message: 'Login successful', token, user: { username: user.username, email: user.email } });
+    });
+});
+
+app.put('/api/auth/change-password', authenticateToken, (req, res) => {
+    const { currentPassword, newPassword } = req.body;
+    const userId = req.user.id; // From token
+
+    if (!currentPassword || !newPassword) {
+        return res.status(400).json({ error: 'Password lama dan baru wajib diisi.' });
+    }
+
+    pool.query('SELECT * FROM users WHERE id = ?', [userId], async (error, results) => {
+        if (error) return res.status(500).json({ error: error.message });
+        if (results.length === 0) return res.status(404).json({ error: 'User tidak ditemukan.' });
+
+        const user = results[0];
+
+        // Verify current password
+        let validPassword = false;
+        if (user.password.startsWith('$2')) {
+            validPassword = await bcrypt.compare(currentPassword, user.password);
+        } else {
+            validPassword = (currentPassword === user.password);
+        }
+
+        if (!validPassword) {
+            return res.status(401).json({ error: 'Password lama salah.' });
+        }
+
+        // Update with new password
+        const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+        pool.query('UPDATE users SET password = ? WHERE id = ?', [hashedNewPassword, userId], (err) => {
+            if (err) return res.status(500).json({ error: err.message });
+            res.json({ message: 'Password berhasil diubah!' });
+        });
     });
 });
 
