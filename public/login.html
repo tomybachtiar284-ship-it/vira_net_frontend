@@ -63,52 +63,23 @@
     </div>
 
     <script>
-        document.getElementById('login-form').addEventListener('submit', async (e) => {
+        document.getElementById('login-form').addEventListener('submit', (e) => {
             e.preventDefault();
 
-            const email = document.getElementById('username').value; // Using email as username for now as per DB
+            const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const errorMsg = document.getElementById('login-error');
-            const submitBtn = document.querySelector('button[type="submit"]');
 
-            // Reset error
-            errorMsg.style.display = 'none';
-            submitBtn.textContent = 'Loading...';
-            submitBtn.disabled = true;
+            if (username === 'admin' && password === 'admin') {
+                // Set the key that admin.js checks for
+                localStorage.setItem('viranet_admin_logged_in', 'true');
+                localStorage.setItem('viranet_admin_username', username);
 
-            try {
-                // Determine if input is email or username (for flexibility, though DB uses email)
-                // For this implementation we will assume the input 'username' field maps to 'email' in request
-                // unless we change server logic. Let's send it as email for now since that's what server expects.
-                // Wait, server expects 'email'. Let's assume user types email in the username box.
-
-                const response = await fetch('http://localhost:3000/api/auth/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ email: email, password: password })
-                });
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    // Save token
-                    localStorage.setItem('admin_token', data.token);
-                    localStorage.setItem('admin_user', JSON.stringify(data.user));
-
-                    // Redirect
-                    window.location.href = 'admin.html';
-                } else {
-                    throw new Error(data.error || 'Login failed');
-                }
-
-            } catch (error) {
-                console.error(error);
-                errorMsg.textContent = error.message || 'Username atau password salah!';
+                // Redirect
+                window.location.href = 'admin.html';
+            } else {
                 errorMsg.style.display = 'block';
-                submitBtn.textContent = 'Masuk Dashboard';
-                submitBtn.disabled = false;
+                errorMsg.textContent = 'Username atau password salah!';
             }
         });
     </script>
