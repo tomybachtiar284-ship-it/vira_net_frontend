@@ -222,8 +222,13 @@ app.put('/api/auth/change-password', authenticateToken, (req, res) => {
 
 // TEST ROUTE
 // Serve static files from 'public' directory
+// Serve static files from 'public' directory with caching
+// Cache static assets for 1 day (86400000ms) to improve performance
 const path = require('path');
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), {
+    maxAge: '1d',
+    etag: false
+}));
 
 // Fallback for SPA (if needed, but for now just serve index.html on root)
 // app.get('*', (req, res) => {
