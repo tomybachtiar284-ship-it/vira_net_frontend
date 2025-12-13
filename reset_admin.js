@@ -94,7 +94,7 @@ function updateUser() {
         }
         console.table(results);
 
-        rl.question('Masukkan ID User yang akan diganti passwordnya: ', (id) => {
+        rl.question('Masukkan ID User ATAU Username yang akan diganti passwordnya: ', (input) => {
             rl.question('Password Baru: ', async (password) => {
                 if (!password.trim()) {
                     console.log('Batal: Password tidak boleh kosong.');
@@ -104,10 +104,23 @@ function updateUser() {
 
                 try {
                     const hashedPassword = await bcrypt.hash(password, 10);
-                    connection.query('UPDATE users SET password = ? WHERE id = ?', [hashedPassword, id], (err, result) => {
+
+                    // Determine if input is ID or Username
+                    let query, params;
+                    if (!isNaN(input)) {
+                        // Input is ID
+                        query = 'UPDATE users SET password = ? WHERE id = ?';
+                        params = [hashedPassword, input];
+                    } else {
+                        // Input is Username
+                        query = 'UPDATE users SET password = ? WHERE username = ?';
+                        params = [hashedPassword, input];
+                    }
+
+                    connection.query(query, params, (err, result) => {
                         if (err) console.error(err.message);
                         else {
-                            if (result.affectedRows === 0) console.log('User ID tidak ditemukan.');
+                            if (result.affectedRows === 0) console.log('User tidak ditemukan.');
                             else console.log('Password berhasil diubah!');
                         }
                         showMenu();
