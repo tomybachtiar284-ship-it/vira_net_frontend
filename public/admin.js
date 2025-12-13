@@ -12,31 +12,13 @@ function checkAuth() {
 
 checkAuth();
 
-// Login Handler
+// Login Handler (Separate file login.js handles this, but kept for safety overlapping)
 const loginForm = document.getElementById('login-form');
 if (loginForm) {
     loginForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const u = document.getElementById('username').value;
-        const p = document.getElementById('password').value;
-
-        if (u === 'admin' && p === 'admin') {
-            localStorage.setItem('viranet_admin_logged_in', 'true');
-            localStorage.setItem('viranet_admin_username', u);
-            window.location.href = 'admin.html';
-        } else {
-            document.getElementById('login-error').style.display = 'block';
-        }
+        // This is now likely handled by login.js, checking strictly to avoid conflicts
+        // kept empty or removed as login.js is the source of truth
     });
-}
-
-// Logout Function
-function logout() {
-    if (confirm('Apakah Anda yakin ingin keluar?')) {
-        localStorage.removeItem('admin_token');
-        localStorage.removeItem('admin_user');
-        window.location.href = 'login.html';
-    }
 }
 
 // Dashboard Logic
@@ -52,10 +34,53 @@ if (window.location.pathname.includes('admin.html')) {
 
         renderPackages();
         renderTickets();
+        setupEventListeners();
     });
 
-    // Navigation
-    window.showSection = function (sectionId) {
+    function setupEventListeners() {
+        // Navigation
+        document.getElementById('nav-dashboard').addEventListener('click', (e) => { e.preventDefault(); showSection('dashboard'); });
+        document.getElementById('nav-packages').addEventListener('click', (e) => { e.preventDefault(); showSection('packages'); });
+        document.getElementById('nav-tickets').addEventListener('click', (e) => { e.preventDefault(); showSection('tickets'); });
+
+        // Logout
+        const btnLogout = document.getElementById('btn-logout');
+        if (btnLogout) btnLogout.addEventListener('click', logout);
+
+        // Modal
+        const btnAddPkg = document.getElementById('btn-add-package');
+        if (btnAddPkg) btnAddPkg.addEventListener('click', openAddModal);
+
+        const btnCloseModal = document.getElementById('btn-close-modal');
+        if (btnCloseModal) btnCloseModal.addEventListener('click', closeModal);
+
+        // Package Table Delegation (Delete)
+        const pkgTable = document.getElementById('packages-table-body');
+        if (pkgTable) {
+            pkgTable.addEventListener('click', (e) => {
+                const btn = e.target.closest('.btn-delete');
+                if (btn) {
+                    const id = btn.dataset.id;
+                    deletePackage(id);
+                }
+            });
+        }
+
+        // Ticket Table Delegation (Complete)
+        const ticketTable = document.getElementById('tickets-table-body');
+        if (ticketTable) {
+            ticketTable.addEventListener('click', (e) => {
+                const btn = e.target.closest('.btn-check');
+                if (btn) {
+                    const id = btn.dataset.id;
+                    updateTicketStatus(id, 'Selesai');
+                }
+            });
+        }
+    }
+
+    // Navigation Logic
+    function showSection(sectionId) {
         document.getElementById('dashboard-section').style.display = 'none';
         document.getElementById('packages-section').style.display = 'none';
         document.getElementById('tickets-section').style.display = 'none';
@@ -72,10 +97,23 @@ if (window.location.pathname.includes('admin.html')) {
             'tickets': 'Pengaduan'
         };
         document.getElementById('page-title').innerText = titles[sectionId];
-    };
+    }
+
+    // Logout Function
+    function logout() {
+        if (confirm('Apakah Anda yakin ingin keluar?')) {
+            localStorage.removeItem('admin_token');
+            localStorage.removeItem('admin_user');
+            // Clear flags
+            localStorage.removeItem('viranet_admin_logged_in');
+            localStorage.removeItem('viranet_admin_username');
+
+            window.location.href = 'login.html';
+        }
+    }
 
     // --- PACKAGES CRUD (Real API) ---
-    const API_URL = 'http://localhost:3000/api';
+    const API_URL = '/api'; // Relative URL for production
 
     async function fetchPackages() {
         try {
@@ -105,7 +143,7 @@ if (window.location.pathname.includes('admin.html')) {
                     <td>${p.speed}</td>
                     <td>${p.period}</td>
                     <td>
-                        <button class="action-btn btn-delete" onclick="deletePackage(${p.id})">
+                        <button class="action-btn btn-delete" data-id="${p.id}">
                             <i class="fas fa-trash"></i>
                         </button>
                     </td>
@@ -162,7 +200,7 @@ if (window.location.pathname.includes('admin.html')) {
     }
 
     // Delete Package
-    window.deletePackage = async function (id) {
+    async function deletePackage(id) {
         if (confirm('Yakin hapus paket ini dari database?')) {
             try {
                 await fetch(`${API_URL}/packages/${id}`, { method: 'DELETE' });
@@ -171,17 +209,17 @@ if (window.location.pathname.includes('admin.html')) {
                 alert('Gagal menghapus paket.');
             }
         }
-    };
+    }
 
     // Modal Functions
-    window.openAddModal = function () {
+    function openAddModal() {
         document.getElementById('package-form').reset();
         document.getElementById('package-modal').style.display = 'flex';
-    };
+    }
 
-    window.closeModal = function () {
+    function closeModal() {
         document.getElementById('package-modal').style.display = 'none';
-    };
+    }
 
     // --- COMPLAINTS/TICKETS (Real API) ---
     async function renderTickets() {
@@ -207,7 +245,7 @@ if (window.location.pathname.includes('admin.html')) {
                             <td><span class="status-badge ${t.status === 'Pending' ? 'pending' : 'active'}">${t.status}</span></td>
                             <td>
                                 ${t.status === 'Pending' ? `
-                                <button class="action-btn btn-check" onclick="updateTicketStatus(${t.id}, 'Selesai')">
+                                <button class="action-btn btn-check" data-id="${t.id}">
                                     <i class="fas fa-check"></i>
                                 </button>` : '-'}
                             </td>
@@ -220,7 +258,7 @@ if (window.location.pathname.includes('admin.html')) {
         }
     }
 
-    window.updateTicketStatus = async function (id, status) {
+    async function updateTicketStatus(id, status) {
         try {
             await fetch(`${API_URL}/complaints/${id}/status`, {
                 method: 'PUT',
@@ -231,5 +269,5 @@ if (window.location.pathname.includes('admin.html')) {
         } catch (err) {
             alert('Gagal mengupdate status.');
         }
-    };
+    }
 }
