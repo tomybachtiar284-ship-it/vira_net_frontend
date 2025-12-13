@@ -66,14 +66,22 @@
         document.getElementById('login-form').addEventListener('submit', async (e) => {
             e.preventDefault();
 
+            // DEBUG ALERT
+            alert('Sedang mencoba login... Mohon tunggu.');
+
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             const errorMsg = document.getElementById('login-error');
             const submitBtn = document.querySelector('button[type="submit"]');
 
             try {
-                // Send matches backend logic logic (username or email)
-                const response = await fetch('/api/auth/login', {
+                // Determine API URL (Localhost vs Production)
+                const isLocal = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost';
+                const apiUrl = isLocal ? 'http://localhost:3000/api/auth/login' : '/api/auth/login';
+
+                console.log('Fetching:', apiUrl); // Debug log
+
+                const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -92,14 +100,22 @@
                     localStorage.setItem('viranet_admin_logged_in', 'true');
                     localStorage.setItem('viranet_admin_username', data.user.username);
 
+                    // DEBUG SUCCESS
+                    alert('Login Berhasil! Mengalihkan ke Dashboard...');
+
                     // Redirect
                     window.location.href = 'admin.html';
                 } else {
+                    // DEBUG SERVER ERROR
+                    alert('Gagal Login: ' + (data.error || 'Unknown Error'));
                     throw new Error(data.error || 'Login failed');
                 }
 
             } catch (error) {
                 console.error(error);
+                // DEBUG CATCH ERROR
+                alert('Terapat Error: ' + error.message);
+
                 errorMsg.textContent = error.message || 'Username atau password salah!';
                 errorMsg.style.display = 'block';
                 submitBtn.textContent = 'Masuk Dashboard';
