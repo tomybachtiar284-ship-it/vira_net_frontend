@@ -11,7 +11,19 @@ const port = process.env.PORT || 3000;
 app.set('trust proxy', 1); // Trust proxy is required when running behind a proxy like Railway/Heroku
 
 // Security & Performance Middleware
-app.use(helmet()); // Protects against common vulnerabilities (XSS, etc)
+app.use(helmet({
+    contentSecurityPolicy: {
+        directives: {
+            defaultSrc: ["'self'"],
+            scriptSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com", "https://unpkg.com"],
+            styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://cdnjs.cloudflare.com", "https://unpkg.com"],
+            fontSrc: ["'self'", "https://fonts.gstatic.com", "https://cdnjs.cloudflare.com"],
+            imgSrc: ["'self'", "data:", "https://via.placeholder.com"],
+            frameSrc: ["'self'", "https://www.google.com"], // Allow Google Maps
+            connectSrc: ["'self'"]
+        }
+    }
+})); // Protects against common vulnerabilities (XSS, etc)
 app.use(compression()); // Compresses responses for faster load
 
 // Rate Limiting (Prevent Brute Force)
