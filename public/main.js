@@ -21,8 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Load Packages (if on packages page or homepage)
+    // Load Packages (home)
     loadPackages();
+
+    // Load Pricing (packages page)
+    loadPricingPackages();
 
     // Initialize Gallery (if on gallery page)
     if (typeof initGallery === 'function') initGallery();
@@ -40,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Load Packages from API
+// Load Packages from API (Home Page - Horizontal Cards)
 async function loadPackages() {
     const packageContainer = document.getElementById('package-container');
     if (!packageContainer) return;
@@ -78,6 +81,58 @@ async function loadPackages() {
     } catch (error) {
         console.error('Gagal memuat paket:', error);
         packageContainer.innerHTML = '<p style="text-align:center; width:100%;">Gagal memuat data paket. Pastikan server aktif.</p>';
+    }
+}
+
+// Load Pricing Packages (Services Page - Vertical/Pricing Cards)
+async function loadPricingPackages() {
+    const pricingContainer = document.getElementById('pricing-container');
+    if (!pricingContainer) return;
+
+    try {
+        const response = await fetch(`${API_URL}/packages`);
+        const packages = await response.json();
+
+        if (packages.length === 0) {
+            pricingContainer.innerHTML = '<div style="width:100%; text-align:center; grid-column: 1/-1;">Belum ada paket tersedia. Silakan hubungi admin.</div>';
+            return;
+        }
+
+        pricingContainer.innerHTML = packages.map((pkg, index) => {
+            // Check if popular (logic: maybe based on name containing 'Pro' or just 2nd item)
+            // For now, let's make the 2nd item popular as per original design intention if available
+            const isPopular = index === 1;
+
+            return `
+            <div class="pricing-card ${isPopular ? 'popular' : ''} scroll-reveal" style="transition-delay: ${0.1 * (index + 1)}s;">
+                ${isPopular ? '<div class="popular-badge">Paling Laris</div>' : ''}
+                <div class="pricing-header">
+                    <h3>${pkg.name}</h3>
+                    <div class="price">${parseInt(pkg.price / 1000)}K<span>${pkg.period}</span></div>
+                    <p style="color: #64748B; font-size: 0.9rem;">${pkg.speed} High Speed Internet</p>
+                </div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check-circle"></i> Speed up to ${pkg.speed}</li>
+                    ${pkg.features ? pkg.features.split(',').map(f => `<li><i class="fas fa-check-circle"></i> ${f.trim()}</li>`).join('') : ''}
+                </ul>
+                <a href="https://wa.me/6285216315002?text=Saya%20tertarik%20paket%20${encodeURIComponent(pkg.name)}"
+                    class="btn ${isPopular ? 'btn-primary' : 'btn-outline'}" style="width: 100%; text-align: center;">Pilih Paket</a>
+            </div>
+            `;
+        }).join('');
+
+        // Re-trigger scroll reveal if needed, or simply let CSS handle it if already observed
+        // Observer in main.js handles .scroll-reveal newly added?
+        // The observer is set on DOMContentLoaded. Dynamic elements need re-observation.
+        // We can manually trigger valid animation state or re-observe.
+        // Simple fix: add 'active' class immediately to avoid complexity or re-run observer
+        setTimeout(() => {
+            document.querySelectorAll('#pricing-container .scroll-reveal').forEach(el => el.classList.add('active'));
+        }, 100);
+
+    } catch (error) {
+        console.error('Gagal memuat pricing:', error);
+        pricingContainer.innerHTML = '<div style="width:100%; text-align:center; grid-column: 1/-1;">Gagal memuat harga. Refresh halaman.</div>';
     }
 }
 
